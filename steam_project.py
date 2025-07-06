@@ -43,11 +43,7 @@ tag_columns = [col for col in tags_df.columns if col != 'appid']
 avg_scores = merged_df.groupby('name')['review_score'].mean()
 top_loved_games = avg_scores.sort_values(ascending=False).head(10)
 
-# --- 7. Most Polarizing Games ---
-score_std = merged_df.groupby('name')['review_score'].std()
-most_polarizing = score_std.sort_values(ascending=False).head(10)
-
-# --- 8. Tag Frequency Among Top-Rated Games ---
+# --- 7. Tag Frequency Among Top-Rated Games ---
 top_games = top_loved_games.index.tolist()
 top_df = merged_df[merged_df['name'].isin(top_games)]
 
@@ -72,7 +68,7 @@ plt.tight_layout()
 plt.savefig("top_rated_game_tags_binary.png")
 plt.show()
 
-# --- 9. Logistic Regression Model ---
+# --- 8. Logistic Regression Model ---
 # Binarize review_score for classification
 # 1 = liked (>= 0.75), 0 = not liked
 y = (merged_df['review_score'] >= 0.75).astype(int)
@@ -85,7 +81,7 @@ if len(X_train) == 0:
     exit()
 model.fit(X_train, y_train)
 
-# --- 10. Evaluation ---
+# --- 9. Evaluation ---
 print("Top predictive tags (coefficients):")
 coeffs = pd.Series(model.coef_[0], index=tag_columns)
 print(coeffs.sort_values(ascending=False).head(10))
@@ -93,7 +89,7 @@ print("Least predictive tags:")
 print(coeffs.sort_values().head(10))
 print("Model Accuracy:", model.score(X_test, y_test))
 
-# --- 11. K-Means Clustering on Review Scores + Tags ---
+# --- 10. K-Means Clustering on Review Scores + Tags ---
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
@@ -149,7 +145,7 @@ cluster_summary = merged_df.groupby('cluster')[['review_score', 'total_ratings']
 print("Cluster summary (average values per cluster):")
 print(cluster_summary.sort_values('review_score', ascending=False))
 
-# --- 12. Cluster Analysis ---
+# --- 11. Cluster Analysis ---
 
 # Show number of games in each cluster
 print("Number of games per cluster:")

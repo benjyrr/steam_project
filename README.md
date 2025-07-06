@@ -20,8 +20,7 @@ To identify which gameplay tags are most predictive of high user ratings on Stea
 **Exploratory Data Analysis (EDA)**  
 - Identified top-rated games with broad user bases (e.g., *Portal 2*, *Baba Is You*)  
 - Created bar chart of most common tags among top-rated games  
-- Observed dominance of *puzzle*, *co_op*, and *singleplayer* tags  
-- Identified the most polarizing games using the standard deviation of review scores
+- Observed dominance of *puzzle*, *co_op*, and *singleplayer* tags
 
 **Modeling Approach**
 
